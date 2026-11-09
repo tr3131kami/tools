@@ -1,133 +1,73 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TOOLS DIRECTORY</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-base: #0f172a;
-      --card-bg: rgba(30, 41, 59, 0.6);
-      --accent-cyan: #06b6d4;
-      --text-main: #f8fafc;
-      --text-sub: #94a3b8;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: var(--bg-base);
-      color: var(--text-main);
-      font-family: 'Space Grotesk', sans-serif;
-      min-height: 100vh;
-      background-image: radial-gradient(circle at 15% 50%, rgba(6, 182, 212, 0.08), transparent 25%),
-                        radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08), transparent 25%);
-    }
-
-    .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
-    header { margin-bottom: 40px; text-align: center; }
-    header h1 { font-size: 2.5rem; letter-spacing: 2px; text-transform: uppercase; }
-    header h1 span { color: var(--accent-cyan); }
-
-    .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
-
-    .card {
-      background: var(--card-bg);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 24px;
-      backdrop-filter: blur(12px);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .card:hover { transform: translateY(-5px); border-color: var(--accent-cyan); }
-
-    .access-btn {
-      display: inline-block;
-      text-decoration: none;
-      color: var(--bg-base);
-      background: linear-gradient(135deg, var(--accent-cyan), #3b82f6);
-      padding: 10px 20px;
-      border-radius: 6px;
-      font-weight: 600;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-    }
-
-    /* モーダル用 */
-    .modal-overlay {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(15, 23, 42, 0.85);
-      backdrop-filter: blur(8px);
-      display: flex; justify-content: center; align-items: center;
-      z-index: 1000; opacity: 0; visibility: hidden; transition: all 0.3s ease;
-    }
-    .modal-overlay.active { opacity: 1; visibility: visible; }
-    .modal-content {
-      background: #1e293b; padding: 40px; border-radius: 20px; max-width: 600px; width: 90%;
-      border: 1px solid var(--accent-cyan); transform: scale(0.9); transition: transform 0.3s ease;
-    }
-    .modal-overlay.active .modal-content { transform: scale(1); }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+<title>ツール集｜suzunokana × とろろぉーーーー</title>
+<meta name="description" content="suzunokana × とろろぉーーーー（tr3131kami）の共同制作ツールをまとめたサイトです。">
+<style>
+  :root { --bg:#fdfcff; --text:#4a4553; --text-muted:#a8a2b3; --accent:#ffb8d1; --accent2:#c4b5fd; --accent3:#a5e8e0; --shadow:0 8px 30px rgba(180,170,200,.12); }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Zen Maru Gothic',"Hiragino Maru Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif; color:var(--text); background:var(--bg); line-height:1.8; position:relative; z-index:0; overflow-x:hidden; }
+  body::before { content:''; position:fixed; width:400px; height:400px; border-radius:50%; background:#ffe0ec; top:-100px; left:-100px; z-index:-1; }
+  body::after { content:''; position:fixed; width:380px; height:380px; border-radius:50%; background:#d9f5f0; bottom:-120px; right:-100px; z-index:-1; }
+  header { text-align:center; padding:84px 20px 30px; }
+  header .badge { display:inline-block; background:rgba(255,255,255,.7); border:1px solid rgba(200,190,220,.35); box-shadow:var(--shadow); border-radius:999px; padding:5px 18px; font-size:.8rem; letter-spacing:.15em; margin-bottom:20px; color:var(--text-muted); font-weight:700; }
+  header h1 { font-size:clamp(2rem,6.5vw,3.2rem); font-weight:900; letter-spacing:.02em; background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3),var(--accent2),var(--accent)); background-size:300% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation:gradientShift 6s ease infinite; }
+  header p.lead { margin-top:14px; font-size:clamp(.95rem,3vw,1.1rem); color:var(--text-muted); font-weight:700; }
+  header .credit { margin-top:24px; font-size:.9rem; background:rgba(255,255,255,.75); box-shadow:var(--shadow); display:inline-block; padding:9px 22px; border-radius:999px; font-weight:700; }
+  main { max-width:860px; margin:0 auto; padding:36px 20px 70px; position:relative; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:22px; }
+  .tool-card { background:#fff; border-radius:24px; padding:26px 24px; box-shadow:var(--shadow); display:flex; flex-direction:column; }
+  .tool-card .num { align-self:flex-start; background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; font-size:.75rem; font-weight:900; letter-spacing:.1em; border-radius:999px; padding:3px 14px; margin-bottom:14px; }
+  .tool-card h2 { font-size:1.2rem; font-weight:900; margin-bottom:8px; }
+  .tool-card p { font-size:.92rem; color:var(--text); flex:1; }
+  .tool-card .open-btn { margin-top:18px; display:block; text-align:center; text-decoration:none; border:none; border-radius:50px; padding:12px; font-size:.95rem; font-weight:700; font-family:inherit; background:linear-gradient(135deg,var(--accent),var(--accent2),var(--accent3),var(--accent)); background-size:300% 300%; color:#fff; box-shadow:0 8px 24px rgba(255,184,209,.4); animation:gradientShift 5s ease infinite; transition:transform .3s, box-shadow .3s; }
+  .tool-card .open-btn:hover { transform:translateY(-3px) scale(1.02); box-shadow:0 14px 36px rgba(255,184,209,.6); }
+  .tool-card.soon { opacity:.65; }
+  .tool-card.soon .num { background:#d9d3e3; }
+  .tool-card.soon .open-btn { background:#e9e4f2; color:var(--text-muted); box-shadow:none; animation:none; pointer-events:none; }
+  footer { text-align:center; padding:28px 20px 44px; color:var(--text-muted); font-size:.85rem; }
+  a { color:#8f74d6; }
+  header .credit a, footer a { color:#8f74d6; text-decoration:none; border-bottom:2px solid #ffb8d1; }
+  @keyframes gradientShift { 0% { background-position:0% 50%; } 50% { background-position:100% 50%; } 100% { background-position:0% 50%; } }
+</style>
 </head>
 <body>
+<header>
+  <div class="badge">TOOLS</div>
+  <h1>ツール集</h1>
+  <p class="lead">共同制作のツールをまとめています。これからも少しずつ増やしていく予定です。</p>
+  <div class="credit">共同制作：<a href="https://scratch.mit.edu/users/suzunokana/" target="_blank" rel="noopener">suzunokana</a> × <a href="https://youtube.com/@t-o-r-o-r-o-r-o-r-o" target="_blank" rel="noopener">とろろぉーーーー</a>（tr3131kami）</div>
+</header>
 
-  <div class="container">
-    <header>
-      <h1>Tools<span>_</span>Directory</h1>
-    </header>
-    <div id="tools-grid" class="tools-grid"></div>
+<main>
+  <div class="grid">
+    <div class="tool-card">
+      <div class="num">第1弾</div>
+      <h2>ScratchLoginSystem</h2>
+      <p>ホームページに「Scratchアカウントでログイン」を搭載できるツール。認証コードを専用プロジェクトにコメントするだけでログインできます。パスワード不要・無料です。</p>
+      <a class="open-btn" href="https://tr3131kami.github.io/ScratchLoginSystem/" target="_blank" rel="noopener">開く</a>
+    </div>
+    <div class="tool-card">
+      <div class="num">第2弾</div>
+      <h2>ScratchProfileCard</h2>
+      <p>ホームページに Scratch のプロフィールカードを表示できるツール。アイコン・ユーザー名・自己紹介・参加日・フォロワー数が、貼るだけで表示されます。</p>
+      <a class="open-btn" href="./profile.html">開く</a>
+    </div>
+    <div class="tool-card soon">
+      <div class="num">第3弾</div>
+      <h2>近日公開</h2>
+      <p>次のツールを考え中です。お楽しみに。</p>
+      <span class="open-btn">準備中</span>
+    </div>
   </div>
+</main>
 
-  <script>
-    // ⚠️ ここを設定してください
-    const SERVICE_DOMAIN = 'projec5'; 
-    const API_KEY = 'zddpGJ1uNt6hn5tSJW9K2xRsIsvrUf8pUUiD'; 
-    const ENDPOINT = 'tools';
-
-    async function fetchTools() {
-      const res = await fetch(`https://${SERVICE_DOMAIN}.microcms.io/api/v1/${ENDPOINT}`, {
-        headers: { 'X-MICROCMS-API-KEY': API_KEY }
-      });
-      const data = await res.json();
-      renderTools(data.contents);
-    }
-
-    function renderTools(tools) {
-      const grid = document.getElementById('tools-grid');
-      tools.forEach(tool => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-          <h2>${tool.title}</h2>
-          <p>${tool.description}</p>
-          <a href="${tool.url}" target="_blank" class="access-btn">Access Tool</a>
-        `;
-        card.addEventListener('click', (e) => {
-          if (!e.target.classList.contains('access-btn')) openModal(tool);
-        });
-        grid.appendChild(card);
-      });
-    }
-
-    function openModal(tool) {
-      const overlay = document.createElement('div');
-      overlay.className = 'modal-overlay';
-      overlay.innerHTML = `
-        <div class="modal-content">
-          <h2>${tool.title}</h2>
-          <p>${tool.detail || '詳細情報はありません。'}</p>
-          <a href="${tool.url}" target="_blank" class="access-btn">Access Tool</a>
-          <button onclick="this.closest('.modal-overlay').remove()" style="margin-left:10px; background:transparent; border:1px solid #94a3b8; color:#fff; padding:10px 20px; cursor:pointer;">Close</button>
-        </div>
-      `;
-      document.body.appendChild(overlay);
-      setTimeout(() => overlay.classList.add('active'), 10);
-      overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
-    }
-
-    fetchTools();
-  </script>
+<footer>
+  ツール集 — 共同制作：<a href="https://scratch.mit.edu/users/suzunokana/" target="_blank" rel="noopener">suzunokana</a> × <a href="https://youtube.com/@t-o-r-o-r-o-r-o-r-o" target="_blank" rel="noopener">とろろぉーーーー</a>（tr3131kami）
+</footer>
 </body>
 </html>

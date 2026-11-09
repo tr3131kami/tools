@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+<title>ScratchProfileCard｜Scratchプロフィールカード表示ツール</title>
+<meta name="description" content="ホームページにScratchのプロフィールカードを表示できるツール。suzunokana × とろろぉーーーー（tr3131kami） 共同制作の第2弾。">
+<style>
+  :root { --bg:#fdfcff; --text:#4a4553; --text-muted:#a8a2b3; --accent:#ffb8d1; --accent2:#c4b5fd; --accent3:#a5e8e0; --shadow:0 8px 30px rgba(180,170,200,.12); }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Zen Maru Gothic',"Hiragino Maru Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif; color:var(--text); background:var(--bg); line-height:1.8; position:relative; z-index:0; overflow-x:hidden; }
+  body::before { content:''; position:fixed; width:400px; height:400px; border-radius:50%; background:#ffe0ec; top:-100px; left:-100px; z-index:-1; }
+  body::after { content:''; position:fixed; width:380px; height:380px; border-radius:50%; background:#d9f5f0; bottom:-120px; right:-100px; z-index:-1; }
+  header { text-align:center; padding:84px 20px 30px; }
+  header .badge { display:inline-block; background:rgba(255,255,255,.7); border:1px solid rgba(200,190,220,.35); box-shadow:var(--shadow); border-radius:999px; padding:5px 18px; font-size:.8rem; letter-spacing:.15em; margin-bottom:20px; color:var(--text-muted); font-weight:700; }
+  header h1 { font-size:clamp(1.8rem,6.5vw,3rem); font-weight:900; letter-spacing:.02em; background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3),var(--accent2),var(--accent)); background-size:300% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation:gradientShift 6s ease infinite; }
+  header p.lead { margin-top:14px; font-size:clamp(.95rem,3vw,1.1rem); color:var(--text-muted); font-weight:700; }
+  header .credit { margin-top:24px; font-size:.9rem; background:rgba(255,255,255,.75); box-shadow:var(--shadow); display:inline-block; padding:9px 22px; border-radius:999px; font-weight:700; }
+  main { max-width:860px; margin:0 auto; padding:36px 20px 70px; position:relative; }
+  section { margin-bottom:52px; }
+  h2 { font-size:1.35rem; margin-bottom:16px; display:flex; align-items:center; gap:12px; font-weight:900; }
+  h2::before { content:''; width:28px; height:3px; border-radius:3px; background:linear-gradient(90deg,var(--accent),var(--accent2)); flex:none; }
+  p { margin-bottom:12px; }
+  .demo { background:#fff; border-radius:24px; padding:30px 24px; box-shadow:var(--shadow); }
+  .demo .row { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px; }
+  .demo input { flex:1; min-width:180px; border:2px solid #eadff5; border-radius:999px; padding:11px 18px; font-size:1rem; font-family:inherit; color:var(--text); outline:none; }
+  .demo input:focus { border-color:var(--accent2); }
+  .demo .card-wrap { display:flex; justify-content:center; }
+  .btn { border:none; border-radius:50px; padding:12px 30px; font-size:1rem; font-weight:700; cursor:pointer; font-family:inherit; transition:transform .3s, box-shadow .3s; }
+  .btn-login { background:linear-gradient(135deg,var(--accent),var(--accent2),var(--accent3),var(--accent)); background-size:300% 300%; color:#fff; box-shadow:0 8px 24px rgba(255,184,209,.4); animation:gradientShift 5s ease infinite; }
+  .btn-login:hover { transform:translateY(-3px) scale(1.03); box-shadow:0 14px 36px rgba(255,184,209,.6); }
+  pre { background:#4a4553; color:#f5f2fa; border-radius:16px; padding:18px; overflow-x:auto; font-size:.85rem; line-height:1.7; margin-bottom:14px; position:relative; box-shadow:var(--shadow); }
+  .copy-btn { position:absolute; top:10px; right:10px; border:none; background:rgba(255,255,255,.16); color:#fff; border-radius:999px; padding:6px 14px; font-size:.75rem; cursor:pointer; font-family:inherit; }
+  .copy-btn:hover { background:rgba(255,255,255,.3); }
+  code { font-family:ui-monospace,Menlo,Consolas,monospace; }
+  p code, li code { background:#ffe8f1; border-radius:6px; padding:1px 7px; font-size:.88em; }
+  .note { background:#fff; border-radius:16px; padding:18px 22px; font-size:.92rem; box-shadow:var(--shadow); }
+  footer { text-align:center; padding:28px 20px 44px; color:var(--text-muted); font-size:.85rem; }
+  a { color:#8f74d6; }
+  header .credit a, footer a { color:#8f74d6; text-decoration:none; border-bottom:2px solid #ffb8d1; }
+  @keyframes gradientShift { 0% { background-position:0% 50%; } 50% { background-position:100% 50%; } 100% { background-position:0% 50%; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="badge">SCRATCH PROFILE TOOL</div>
+  <h1>ScratchProfileCard</h1>
+  <p class="lead">ホームページに「Scratchのプロフィールカード」を表示するためのツールです。</p>
+  <div class="credit">共同制作：<a href="https://scratch.mit.edu/users/suzunokana/" target="_blank" rel="noopener">suzunokana</a> × <a href="https://youtube.com/@t-o-r-o-r-o-r-o-r-o" target="_blank" rel="noopener">とろろぉーーーー</a>（tr3131kami）</div>
+</header>
+
+<main>
+  <section>
+    <h2>ライブデモ</h2>
+    <p>Scratchのユーザー名を入れると、その人のプロフィールカードが表示されます。試しに自分の名前でも表示してみてください。</p>
+    <div class="demo">
+      <div class="row">
+        <input id="demoName" type="text" value="suzunokana" placeholder="Scratchのユーザー名">
+        <button class="btn btn-login" id="demoShow">表示する</button>
+      </div>
+      <div class="card-wrap"><div id="demoCard"></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>ホームページへの入れ方</h2>
+    <p>1. ライブラリを読み込みます。</p>
+    <pre><code>&lt;script src="https://tr3131kami.github.io/tools/scratch-profile.js"&gt;&lt;/script&gt;</code></pre>
+    <p>2. カードを表示したい場所に、空の要素を置きます。</p>
+    <pre><code>&lt;div id="myCard"&gt;&lt;/div&gt;</code></pre>
+    <p>3. 表示したいユーザー名を指定して呼び出します。</p>
+    <pre><code>&lt;script&gt;
+  ScratchProfile.card({ username: "suzunokana", target: "#myCard" });
+&lt;/script&gt;</code></pre>
+    <p>カードにはアイコン、ユーザー名、自己紹介、参加日、フォロワー数と、プロフィールへのリンクが表示されます。情報は Scratch の公式APIからその場で取得するので、いつでも最新の状態になります。</p>
+  </section>
+
+  <section>
+    <h2>第1弾はこちら</h2>
+    <div class="note">
+      <p>ホームページに「Scratchアカウントでログイン」を入れるツール <a href="https://tr3131kami.github.io/ScratchLoginSystem/" target="_blank" rel="noopener">ScratchLoginSystem</a> も公開中です。同じシリーズの第1弾です。ほかのツールは <a href="./index.html">ツール集トップ</a> から見られます。</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>注意</h2>
+    <div class="note">
+      <p>・このツールは Scratch の公式APIで公開情報を表示するだけのものです。パスワードなどの情報を取得することはありません。</p>
+      <p>・フォロワー数は環境によって取得できないことがあり、その場合は人数なしでカードが表示されます。</p>
+      <p>・Scratch のサイトやAPIの都合で、一時的に表示できないことがあります。</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  ScratchProfileCard — 共同制作：<a href="https://scratch.mit.edu/users/suzunokana/" target="_blank" rel="noopener">suzunokana</a> × <a href="https://youtube.com/@t-o-r-o-r-o-r-o-r-o" target="_blank" rel="noopener">とろろぉーーーー</a>（tr3131kami）
+</footer>
+
+<script src="./scratch-profile.js"></script>
+<script>
+  var nameInput = document.getElementById('demoName');
+  var showBtn = document.getElementById('demoShow');
+  function showDemo() {
+    var name = nameInput.value.trim();
+    if (name) ScratchProfile.card({ username: name, target: '#demoCard' });
+  }
+  showBtn.addEventListener('click', showDemo);
+  nameInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') showDemo(); });
+  showDemo();
+</script>
+<script>
+  // コードブロックにコピーボタンを付ける
+  document.querySelectorAll('pre').forEach(function (pre) {
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'copy-btn';
+    btn.textContent = 'コピー';
+    btn.addEventListener('click', function () {
+      var text = pre.querySelector('code').innerText;
+      navigator.clipboard.writeText(text).then(function () {
+        btn.textContent = 'コピーしました';
+        setTimeout(function () { btn.textContent = 'コピー'; }, 1600);
+      });
+    });
+    pre.appendChild(btn);
+  });
+</script>
+</body>
+</html>
