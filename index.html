@@ -19,10 +19,15 @@
   header p.lead { margin-top:14px; font-size:clamp(.95rem,3vw,1.1rem); color:var(--text-muted); font-weight:700; }
   header .credit { margin-top:24px; font-size:.9rem; background:rgba(255,255,255,.75); box-shadow:var(--shadow); display:inline-block; padding:9px 22px; border-radius:999px; font-weight:700; }
   main { max-width:860px; margin:0 auto; padding:36px 20px 70px; position:relative; }
+  section { margin-bottom:52px; }
+  h2 { font-size:1.35rem; margin-bottom:16px; display:flex; align-items:center; gap:12px; font-weight:900; }
+  h2::before { content:''; width:28px; height:3px; border-radius:3px; background:linear-gradient(90deg,var(--accent),var(--accent2)); flex:none; }
+  h2 .kind { font-size:.75rem; color:var(--text-muted); letter-spacing:.1em; }
+  h2 a { color:inherit; text-decoration:none; border-bottom:2px solid #ffb8d1; }
   .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:22px; }
   .tool-card { background:#fff; border-radius:24px; padding:26px 24px; box-shadow:var(--shadow); display:flex; flex-direction:column; }
   .tool-card .num { align-self:flex-start; background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; font-size:.75rem; font-weight:900; letter-spacing:.1em; border-radius:999px; padding:3px 14px; margin-bottom:14px; }
-  .tool-card h2 { font-size:1.2rem; font-weight:900; margin-bottom:8px; }
+  .tool-card h3 { font-size:1.2rem; font-weight:900; margin-bottom:8px; }
   .tool-card p { font-size:.92rem; color:var(--text); flex:1; }
   .tool-card .open-btn { margin-top:18px; display:block; text-align:center; text-decoration:none; border:none; border-radius:50px; padding:12px; font-size:.95rem; font-weight:700; font-family:inherit; background:linear-gradient(135deg,var(--accent),var(--accent2),var(--accent3),var(--accent)); background-size:300% 300%; color:#fff; box-shadow:0 8px 24px rgba(255,184,209,.4); animation:gradientShift 5s ease infinite; transition:transform .3s, box-shadow .3s; }
   .tool-card .open-btn:hover { transform:translateY(-3px) scale(1.02); box-shadow:0 14px 36px rgba(255,184,209,.6); }
@@ -44,26 +49,51 @@
 </header>
 
 <main>
-  <div class="grid">
-    <div class="tool-card">
-      <div class="num">第1弾</div>
-      <h2>ScratchLoginSystem</h2>
-      <p>ホームページに「Scratchアカウントでログイン」を搭載できるツール。認証コードを専用プロジェクトにコメントするだけでログインできます。パスワード不要・無料です。</p>
-      <a class="open-btn" href="https://tr3131kami.github.io/ScratchLoginSystem/" target="_blank" rel="noopener">開く</a>
+  <section>
+    <h2><a href="https://scratch.mit.edu/users/suzunokana/" target="_blank" rel="noopener">suzunokana</a> × <a href="https://youtube.com/@t-o-r-o-r-o-r-o-r-o" target="_blank" rel="noopener">とろろぉーーーー</a> <span class="kind">共同制作</span></h2>
+    <div class="grid">
+      <div class="tool-card">
+        <div class="num">第1弾</div>
+        <h3>ScratchLoginSystem</h3>
+        <p>ホームページに「Scratchアカウントでログイン」を搭載できるツール。認証コードを専用プロジェクトにコメントするだけでログインできます。パスワード不要・無料です。</p>
+        <a class="open-btn" href="https://tr3131kami.github.io/ScratchLoginSystem/" target="_blank" rel="noopener">開く</a>
+      </div>
+      <div class="tool-card">
+        <div class="num">第2弾</div>
+        <h3>ScratchProfileCard</h3>
+        <p>ホームページに Scratch のプロフィールカードを表示できるツール。アイコン・ユーザー名・自己紹介・注目プロジェクトが、貼るだけで表示されます。</p>
+        <a class="open-btn" href="./profile.html">開く</a>
+      </div>
+      <div class="tool-card soon">
+        <div class="num">第3弾</div>
+        <h3>近日公開</h3>
+        <p>次のツールを考え中です。お楽しみに。</p>
+        <span class="open-btn">準備中</span>
+      </div>
     </div>
-    <div class="tool-card">
-      <div class="num">第2弾</div>
-      <h2>ScratchProfileCard</h2>
-      <p>ホームページに Scratch のプロフィールカードを表示できるツール。アイコン・ユーザー名・自己紹介・注目プロジェクトが、貼るだけで表示されます。</p>
-      <a class="open-btn" href="./profile.html">開く</a>
+  </section>
+
+  <section>
+    <h2><a href="https://scratch.mit.edu/users/suzunokana/" target="_blank" rel="noopener">suzunokana</a> <span class="kind">個人制作</span></h2>
+    <div class="grid">
+      <div class="tool-card soon">
+        <h3>近日公開</h3>
+        <p>suzunokana の個人ツールを、ここにまとめていく予定です。</p>
+        <span class="open-btn">準備中</span>
+      </div>
     </div>
-    <div class="tool-card soon">
-      <div class="num">第3弾</div>
-      <h2>近日公開</h2>
-      <p>次のツールを考え中です。お楽しみに。</p>
-      <span class="open-btn">準備中</span>
+  </section>
+
+  <section>
+    <h2><a href="https://youtube.com/@t-o-r-o-r-o-r-o-r-o" target="_blank" rel="noopener">とろろぉーーーー</a> <span class="kind">個人制作</span></h2>
+    <div class="grid">
+      <div class="tool-card soon">
+        <h3>近日公開</h3>
+        <p>とろろぉーーーーの個人ツールを、ここにまとめていく予定です。</p>
+        <span class="open-btn">準備中</span>
+      </div>
     </div>
-  </div>
+  </section>
 </main>
 
 <footer>
