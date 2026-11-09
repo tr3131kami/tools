@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TororoCountdown｜カウントダウン表示ツール</title>
+<meta name="description" content="ホームページにカウントダウンを表示できる埋め込みツール。日時とタイトルを指定して貼るだけ。by とろろぉーーーー">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fdfcff;
+    --text: #4a4553;
+    --text-muted: #a8a2b3;
+    --accent: #ffb8d1;
+    --accent2: #c4b5fd;
+    --accent3: #a5e8e0;
+    --shadow: 0 8px 30px rgba(180,170,200,.12);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Zen Maru Gothic',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; overflow-x:hidden; }
+  .bg-blobs { position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none; }
+  .bg-blobs::before, .bg-blobs::after { content:''; position:absolute; border-radius:50%; filter:blur(70px); opacity:.45; }
+  .bg-blobs::before { width:480px; height:480px; background:#ffe4ef; top:-140px; right:-80px; }
+  .bg-blobs::after { width:420px; height:420px; background:#e4fbf7; bottom:-160px; left:-100px; }
+  header { text-align:center; padding:56px 20px 10px; }
+  .credit { display:inline-block; background:#fff; border-radius:999px; box-shadow:var(--shadow); padding:7px 16px; font-size:.8rem; color:var(--text-muted); margin-bottom:18px; }
+  .credit a { color:var(--text); font-weight:700; text-decoration:none; border-bottom:2px solid var(--accent); }
+  h1 { font-size:clamp(1.9rem,6vw,2.9rem); font-weight:900; line-height:1.25;
+       background:linear-gradient(90deg,#ff9ec4,#a78bfa,#7eddd0,#ff9ec4); background-size:300% 100%;
+       -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+       animation:gradientShift 6s ease infinite; }
+  @keyframes gradientShift { 0%,100% { background-position:0% 50%; } 50% { background-position:100% 50%; } }
+  .tagline { color:var(--text-muted); margin-top:12px; font-size:.95rem; }
+  main { max-width:720px; margin:0 auto; padding:30px 20px 70px; }
+  section { background:#fff; border-radius:24px; box-shadow:var(--shadow); padding:28px 26px; margin-bottom:26px; }
+  h2 { font-size:1.25rem; margin-bottom:14px; display:flex; align-items:center; gap:12px; font-weight:900; }
+  h2::before { content:''; width:28px; height:3px; border-radius:3px; background:linear-gradient(90deg,var(--accent),var(--accent2)); }
+  p, li { font-size:.95rem; line-height:1.8; }
+  ul { padding-left:1.3em; }
+  code { font-family:ui-monospace,Menlo,Consolas,monospace; background:#f6f3ff; border-radius:6px; padding:1px 6px; font-size:.85em; }
+  .code-wrap { position:relative; margin:10px 0 16px; }
+  pre { background:#2e2a38; color:#f3efff; border-radius:14px; padding:16px; overflow-x:auto; }
+  pre code { background:transparent; color:inherit; padding:0; font-size:.83rem; line-height:1.7; }
+  .copy-btn { position:absolute; top:8px; right:8px; border:none; background:rgba(255,255,255,.16); color:#fff; border-radius:999px; padding:5px 13px; font-size:.75rem; font-weight:700; font-family:inherit; cursor:pointer; }
+  .copy-btn:hover { background:rgba(255,255,255,.3); }
+  .demo-form { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px; }
+  .demo-form input { flex:1; min-width:170px; border:2px solid #eee9f7; border-radius:999px; padding:11px 18px; font-size:.95rem; font-family:inherit; color:var(--text); outline:none; background:#fff; }
+  .demo-form input:focus { border-color:var(--accent2); }
+  .btn { display:inline-block; border:none; cursor:pointer; background:linear-gradient(135deg,var(--accent),var(--accent2),var(--accent3),var(--accent)); background-size:300% 300%; color:#fff; font-weight:700; font-size:.95rem; font-family:inherit; padding:12px 28px; border-radius:999px; text-decoration:none; animation:gradientShift 5s ease infinite; }
+  .note { color:var(--text-muted); font-size:.85rem; }
+  footer { text-align:center; padding:0 20px 44px; color:var(--text-muted); font-size:.8rem; }
+  footer a { color:var(--text-muted); }
+  footer .credit-name { color:var(--text); font-weight:700; text-decoration:none; border-bottom:2px solid var(--accent); }
+</style>
+</head>
+<body>
+<div class="bg-blobs"></div>
+<header>
+  <div class="credit">by <a href="https://youtube.com/@t-o-r-o-r-o-r-o-r-o" target="_blank" rel="noopener">とろろぉーーーー</a></div>
+  <h1>TororoCountdown</h1>
+  <p class="tagline">ホームページにカウントダウンを表示できる、埋め込みツールです。</p>
+</header>
+<main>
+  <section>
+    <h2>ライブデモ</h2>
+    <p>日時とタイトルを選んで「表示する」を押すと、下にカウントダウンが出ます。</p>
+    <div class="demo-form">
+      <input id="demoDate" type="datetime-local">
+      <input id="demoLabel" type="text" placeholder="タイトル（例：お正月まで）">
+      <button class="btn" id="demoBtn" type="button">表示する</button>
+    </div>
+    <div id="demoWrap"></div>
+  </section>
+
+  <section>
+    <h2>ホームページへの入れ方</h2>
+    <p>1. ライブラリを読み込みます。</p>
+    <div class="code-wrap"><pre><code>&lt;script src="https://tr3131kami.github.io/tools/tororo-countdown.js"&gt;&lt;/script&gt;</code></pre><button class="copy-btn" type="button">コピー</button></div>
+    <p>2. カウントダウンを表示したい場所に、空の要素を置きます。</p>
+    <div class="code-wrap"><pre><code>&lt;div id="myCountdown"&gt;&lt;/div&gt;</code></pre><button class="copy-btn" type="button">コピー</button></div>
+    <p>3. 目標の日時と、表示したい場所を指定して呼び出します。</p>
+    <div class="code-wrap"><pre><code>&lt;script&gt;
+  TororoCountdown.show({
+    to: "2027-01-01T00:00:00",
+    target: "#myCountdown",
+    label: "お正月まで",
+    doneText: "当日です！"
+  });
+&lt;/script&gt;</code></pre><button class="copy-btn" type="button">コピー</button></div>
+    <p>オプションは4つです。<code>to</code>（目標の日時）と <code>target</code>（表示する場所）は必須、<code>label</code>（タイトル）と <code>doneText</code>（日時を過ぎたときに出る文）は任意です。</p>
+  </section>
+
+  <section>
+    <h2>ツール集はこちら</h2>
+    <p>ほかのツールは <a href="./index.html">ツール集</a> にまとまっています。</p>
+  </section>
+
+  <section>
+    <h2>注意</h2>
+    <ul>
+      <li>日時は、ページを見ている人の端末の時刻で計算されます。</li>
+      <li>このツールは表示専用です。個人情報を取得することはありません。</li>
+    </ul>
+  </section>
+</main>
+<footer>
+  <p>© 2026 <a class="credit-name" href="https://youtube.com/@t-o-r-o-r-o-r-o-r-o" target="_blank" rel="noopener">とろろぉーーーー</a> ・ TororoCountdown</p>
+</footer>
+<script src="./tororo-countdown.js?v=1"></script>
+<script>
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var code = btn.parentElement.querySelector('code').innerText;
+      function done() {
+        btn.textContent = 'コピーしました';
+        setTimeout(function () { btn.textContent = 'コピー'; }, 1600);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(done).catch(function () { fallback(); });
+      } else { fallback(); }
+      function fallback() {
+        var ta = document.createElement('textarea');
+        ta.value = code;
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(ta);
+        done();
+      }
+    });
+  });
+
+  var demoBtn = document.getElementById('demoBtn');
+  function showDemo() {
+    var dateVal = document.getElementById('demoDate').value;
+    var labelVal = document.getElementById('demoLabel').value.trim();
+    if (!dateVal) {
+      document.getElementById('demoWrap').innerHTML = '<p class="note">先に日時を選んでください。</p>';
+      return;
+    }
+    TororoCountdown.show({
+      to: dateVal,
+      target: '#demoWrap',
+      label: labelVal || undefined,
+      doneText: '当日です！'
+    });
+  }
+  demoBtn.addEventListener('click', showDemo);
+</script>
+</body>
+</html>
