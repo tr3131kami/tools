@@ -57,7 +57,7 @@
     <p>Scratchのユーザー名を入れると、その人のプロフィールカードが表示されます。試しに自分の名前でも表示してみてください。</p>
     <div class="demo">
       <div class="row">
-        <input id="demoName" type="text" value="suzunokana" placeholder="Scratchのユーザー名">
+        <input id="demoName" type="text" value="" placeholder="Scratchのユーザー名">
         <button class="btn btn-login" id="demoShow">表示する</button>
       </div>
       <div class="card-wrap"><div id="demoCard"></div></div>
@@ -108,7 +108,6 @@
   }
   showBtn.addEventListener('click', showDemo);
   nameInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') showDemo(); });
-  showDemo();
 </script>
 <script>
   // コードブロックにコピーボタンを付ける
